@@ -1,7 +1,7 @@
 import React, { createContext, useContext } from 'react';
 import { db } from '../lib/firebase'; // Ensure this is the correct path to your firebase config
 import { doc, setDoc, collection, getDocs } from 'firebase/firestore';
-
+import { useNavigate } from 'react-router-dom';
 interface FirebaseContextType {
   saveTestData: (data: TestData) => Promise<void>;
   saveCProfileData: (data: any, userId: string) => Promise<void>;
@@ -29,10 +29,12 @@ export const FirebaseProvider = ({ children }: { children: React.ReactNode }) =>
 
   // Function to save user profile data
   const saveCProfileData = async (data: any, userId: string) => {
+    const navigate = useNavigate();  // Get the navigate function
     try {
       const userRef = doc(db, 'User', userId); // Document reference
       await setDoc(userRef, data); // Save profile data
       console.log('Profile data saved successfully');
+      navigate('/');  // Navigate to Home page
     } catch (error) {
       console.error('Error saving profile data:', error);
     }
