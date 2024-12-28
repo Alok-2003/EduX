@@ -8,7 +8,7 @@ const Profile = () => {
 
     const handleLogout = useCallback(async () => {
         if (ocAuth) {
-            await ocAuth.logout('http://localhost:5173');  // Logout URL
+            await ocAuth.logout('https://eduxx.vercel.app/');  // Logout URL
             setTimeout(() => {
                 navigate('/');  // Redirect to home page after logout
             }, 500); // Adjust the delay time (500ms) if needed

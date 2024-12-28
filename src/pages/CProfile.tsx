@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Building2, UserCircle } from 'lucide-react';
 import { useFirebase } from '../contexts/FirebaseContext';
+import { useOCAuth } from '@opencampus/ocid-connect-js';
 
 
 const RoleSelector = ({ onSelect }: { onSelect: (role: 'developer' | 'enterprise') => void }) => (
@@ -25,17 +26,23 @@ const RoleSelector = ({ onSelect }: { onSelect: (role: 'developer' | 'enterprise
   </div>
 );
 
-const DeveloperForm = ({ saveProfile }: { saveProfile: (data: any) => void }) => {
-  const [fullName, setFullName] = useState('');
-  const [experience, setExperience] = useState('');
-  const [skills, setSkills] = useState('');
-  const [github, setGithub] = useState('');
-  const [telegram, setTelegram] = useState('');
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    saveProfile({ fullName, experience, skills, github, telegram });
-  };
+const DeveloperForm = ({
+    saveProfile,
+    role,
+  }: {
+    saveProfile: (data: any) => void;
+    role: 'developer' | 'enterprise';
+  }) => {
+    const [fullName, setFullName] = useState('');
+    const [experience, setExperience] = useState('');
+    const [skills, setSkills] = useState('');
+    const [github, setGithub] = useState('');
+    const [telegram, setTelegram] = useState('');
+  
+    const handleSubmit = (e: React.FormEvent) => {
+      e.preventDefault();
+      saveProfile({ fullName, experience, skills, github, telegram, role });
+    };
 
   return (
     <form className="space-y-6" onSubmit={handleSubmit}>
@@ -97,17 +104,23 @@ const DeveloperForm = ({ saveProfile }: { saveProfile: (data: any) => void }) =>
   );
 };
 
-const EnterpriseForm = ({ saveProfile }: { saveProfile: (data: any) => void }) => {
-  const [companyName, setCompanyName] = useState('');
-  const [website, setWebsite] = useState('');
-  const [contactEmail, setContactEmail] = useState('');
-  const [telegram, setTelegram] = useState('');
-  const [description, setDescription] = useState('');
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    saveProfile({ companyName, website, contactEmail, telegram, description });
-  };
+const EnterpriseForm = ({
+    saveProfile,
+    role,
+  }: {
+    saveProfile: (data: any) => void;
+    role: 'developer' | 'enterprise';
+  }) => {
+    const [companyName, setCompanyName] = useState('');
+    const [website, setWebsite] = useState('');
+    const [contactEmail, setContactEmail] = useState('');
+    const [telegram, setTelegram] = useState('');
+    const [description, setDescription] = useState('');
+  
+    const handleSubmit = (e: React.FormEvent) => {
+      e.preventDefault();
+      saveProfile({ companyName, website, contactEmail, telegram, description, role });
+    };
 
   return (
     <form className="space-y-6" onSubmit={handleSubmit}>
@@ -171,9 +184,10 @@ const EnterpriseForm = ({ saveProfile }: { saveProfile: (data: any) => void }) =
 const CProfile = () => {
   const [selectedRole, setSelectedRole] = useState<'developer' | 'enterprise' | null>(null);
   const { saveCProfileData } = useFirebase();
+  const { ethAddress } = useOCAuth();
 
   const saveProfile = (data: any) => {
-    const userId = 'some-user-id'; // Use a unique user ID or obtain from session
+    const userId = ethAddress; // Use a unique user ID or obtain from session
     saveCProfileData(data, userId); // Save the profile data to Firestore
   };
 
@@ -185,9 +199,9 @@ const CProfile = () => {
           {!selectedRole ? (
             <RoleSelector onSelect={setSelectedRole} />
           ) : selectedRole === 'developer' ? (
-            <DeveloperForm saveProfile={saveProfile} />
+            <DeveloperForm saveProfile={saveProfile} role="developer" />
           ) : (
-            <EnterpriseForm saveProfile={saveProfile} />
+            <EnterpriseForm saveProfile={saveProfile} role="enterprise" />
           )}
         </div>
       </div>

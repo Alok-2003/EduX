@@ -1,10 +1,11 @@
 import React, { createContext, useContext } from 'react';
 import { db } from '../lib/firebase'; // Ensure this is the correct path to your firebase config
-import { doc, setDoc } from 'firebase/firestore';
+import { doc, setDoc, collection, getDocs } from 'firebase/firestore';
 
 interface FirebaseContextType {
   saveTestData: (data: TestData) => Promise<void>;
   saveCProfileData: (data: any, userId: string) => Promise<void>;
+  fetchAllUsers: () => Promise<any[]>;
 }
 
 interface TestData {
@@ -37,9 +38,24 @@ export const FirebaseProvider = ({ children }: { children: React.ReactNode }) =>
     }
   };
 
+  // Function to fetch all documents from 'User' collection
+  const fetchAllUsers = async () => {
+    try {
+      const querySnapshot = await getDocs(collection(db, 'User')); // Get all documents from 'User' collection
+      const users: any[] = [];
+      querySnapshot.forEach((doc) => {
+        users.push({ id: doc.id, ...doc.data() });
+      });
+      return users;
+    } catch (error) {
+      console.error('Error fetching users:', error);
+      return [];
+    }
+  };
+
   // Provide both functions to the context
   return (
-    <FirebaseContext.Provider value={{ saveTestData, saveCProfileData }}>
+    <FirebaseContext.Provider value={{ saveTestData, saveCProfileData, fetchAllUsers }}>
       {children}
     </FirebaseContext.Provider>
   );
