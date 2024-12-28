@@ -105,7 +105,6 @@ export default function Learn() {
                 <div
                   key={index}
                   className="bg-white rounded-xl shadow-md overflow-hidden cursor-pointer"
-                  onClick={() => openModal(item)}
                 >
                   <div className="p-6">
                     <div className="flex items-center mb-4">
