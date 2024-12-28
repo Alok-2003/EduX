@@ -1,23 +1,23 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import './App.css';
-import Learn from './pages/Learn';
-import Jobs from './pages/Jobs';
-import Header from './Components/Header';
-import Enterprise from './pages/Enterprise';
-import Home from './pages/Home';
+import React from 'react';
+import { OCConnect } from '@opencampus/ocid-connect-js';
+import AppRoutes from './Components/Routes';
 
-function App() {
-  return (
-    <Router>
-      <Header/>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/learn" element={<Learn />} />
-        <Route path="/jobs" element={<Jobs />} />
-        <Route path="/enterprise" element={<Enterprise />} />
-      </Routes>
-    </Router>
-  );
-}
+const App: React.FC = () => {
+    const opts = {
+        redirectUri: 'http://localhost:5173/redirect',
+        referralCode: 'TEST123', // pass referral code to Authentication Service
+    };
+
+    return (
+        <OCConnect opts={opts} sandboxMode={true}>
+            <div className="App">
+                <header className="App-header"></header>
+                <main>
+                    <AppRoutes />
+                </main>
+            </div>
+        </OCConnect>
+    );
+};
 
 export default App;
