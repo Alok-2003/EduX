@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Building2, UserCircle } from 'lucide-react';
 import { useFirebase } from '../contexts/FirebaseContext';
 import { useOCAuth } from '@opencampus/ocid-connect-js';
-
+import { useNavigate } from 'react-router-dom';  // Importing useNavigate
 
 const RoleSelector = ({ onSelect }: { onSelect: (role: 'developer' | 'enterprise') => void }) => (
   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -185,10 +185,12 @@ const CProfile = () => {
   const [selectedRole, setSelectedRole] = useState<'developer' | 'enterprise' | null>(null);
   const { saveCProfileData } = useFirebase();
   const { ethAddress } = useOCAuth();
-
+  const navigate = useNavigate();  
   const saveProfile = (data: any) => {
     const userId = ethAddress; // Use a unique user ID or obtain from session
-    saveCProfileData(data, userId); // Save the profile data to Firestore
+    saveCProfileData(data, userId); 
+    navigate('/');
+    // Save the profile data to Firestore
   };
 
   return (

@@ -29,12 +29,10 @@ export const FirebaseProvider = ({ children }: { children: React.ReactNode }) =>
 
   // Function to save user profile data
   const saveCProfileData = async (data: any, userId: string) => {
-    const navigate = useNavigate();  // Get the navigate function
     try {
       const userRef = doc(db, 'User', userId); // Document reference
       await setDoc(userRef, data); // Save profile data
       console.log('Profile data saved successfully');
-      navigate('/');  // Navigate to Home page
     } catch (error) {
       console.error('Error saving profile data:', error);
     }
