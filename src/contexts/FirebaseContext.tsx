@@ -1,7 +1,6 @@
 import React, { createContext, useContext } from 'react';
 import { db } from '../lib/firebase'; // Ensure this is the correct path to your firebase config
 import { doc, setDoc, collection, getDocs } from 'firebase/firestore';
-import { useNavigate } from 'react-router-dom';
 interface FirebaseContextType {
   saveTestData: (data: TestData) => Promise<void>;
   saveCProfileData: (data: any, userId: string) => Promise<void>;
