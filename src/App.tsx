@@ -4,7 +4,7 @@ import AppRoutes from './Components/Routes';
 
 const App: React.FC = () => {
     const opts = {
-        redirectUri: 'https://eduxx.vercel.app/',
+        redirectUri: 'https://eduxx.vercel.app/redirect',
         referralCode: 'TEST123', // pass referral code to Authentication Service
     };
 
