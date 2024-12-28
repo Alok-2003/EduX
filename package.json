@@ -10,11 +10,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@headlessui/react": "^2.2.0",
     "@opencampus/ocid-connect-js": "^1.2.5",
+    "firebase": "^11.1.0",
     "lucide-react": "^0.469.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^7.1.1"
+    "react-markdown": "^9.0.1",
+    "react-router-dom": "^7.1.1",
+    "react-syntax-highlighter": "^15.6.1",
+    "remark-gfm": "^4.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",

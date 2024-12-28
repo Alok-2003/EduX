@@ -8,10 +8,13 @@ import Enterprise from '../pages/Enterprise';
 import Header from './Header';
 import Profile from '../pages/Profile';
 import Quest from './Quest';
+import Read from '../pages/Read';
+import CProfile from '../pages/CProfile';
+import Test from '../pages/Test';
 
 const AppRoutes: React.FC = () => {
     const onLoginSuccess = () => {
-        window.location.href = '/'; // Navigate programmatically using window.location
+        window.location.href = '/CProfile'; // Navigate programmatically using window.location
     };
 
     const onLoginError = () => {
@@ -34,6 +37,9 @@ const AppRoutes: React.FC = () => {
                 <Route path="/enterprise" element={<Enterprise />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/quest" element={<Quest />} />
+                <Route path="/read" element={<Read />} />
+                <Route path="/CProfile" element={<CProfile />} />
+                <Route path="/test" element={<Test />} />
             </Routes>
         </Router>
     );

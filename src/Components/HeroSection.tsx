@@ -28,9 +28,9 @@ function GradientText({ children }: { children: React.ReactNode }) {
 
 function Stats() {
   const stats = [
-    { icon: <Shield className="w-12 h-12" />, value: '1000+', label: 'Audits Completed' },
-    { icon: <Code className="w-12 h-12" />, value: '$2B+', label: 'Protected Value' },
-    { icon: <Users className="w-12 h-12" />, value: '500+', label: 'Expert Auditors' },
+    { icon: <Shield className="w-12 h-12" />, value: '500+', label: 'Contracts Audited' },
+    { icon: <Code className="w-12 h-12" />, value: '$1.5B+', label: 'Vulnerabilities Found' },
+    { icon: <Users className="w-12 h-12" />, value: '300+', label: 'Auditors Competing' },
   ];
 
   return (
@@ -58,24 +58,24 @@ export default function HeroSection() {
           <div className="text-center lg:text-left">
             <div className="flex items-center justify-center lg:justify-start space-x-2 mb-6">
               <Shield className="w-6 h-6 text-primary-light" />
-              <span className="text-primary-light font-semibold">Secure • Reliable • AI-Powered</span>
+              <span className="text-primary-light font-semibold">AI-Driven • Competitive • Secure</span>
             </div>
 
             <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white">
-              Secure Your <GradientText>Smart Contracts</GradientText> with AI-Powered Auditing
+              Compete to <GradientText>Audit and Secure</GradientText> Smart Contracts
             </h1>
 
             <p className="text-xl md:text-2xl text-gray-300 mb-8">
-              The most advanced blockchain security platform powered by AI and expert auditors
+              EduX creates a competitive environment where developers race to uncover vulnerabilities, powered by AI tools to enhance the audit process.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
               <Link to="/enterprise" className="w-full sm:w-auto bg-gradient-to-r from-primary-light to-primary hover:opacity-90 text-dark font-semibold px-8 py-3 rounded-lg flex items-center justify-center space-x-2 transition-all duration-200">
-                <span>Get Started</span>
+                <span>List Your Contract</span>
                 <Zap className="w-5 h-5" />
               </Link>
               <Link to="/learn" className="w-full sm:w-auto border-2 border-primary-light text-primary-light hover:bg-primary-light hover:text-dark px-8 py-3 rounded-lg font-semibold transition-all duration-200">
-                Learn More
+                Learn About Auditing
               </Link>
             </div>
           </div>
@@ -84,21 +84,21 @@ export default function HeroSection() {
             <div className="absolute inset-0 bg-gradient-to-br from-primary-light/20 to-accent/20 rounded-3xl filter blur-3xl"></div>
             <div className="relative bg-dark/80 backdrop-blur-sm border border-primary-light/20 rounded-3xl p-8">
               <pre className="text-primary-light/90 text-sm overflow-x-auto">
-                <code>{`// Smart Contract Audit Example
+                <code>{`// Vulnerable Smart Contract Example
 contract Token {
     mapping(address => uint) balances;
-    
+
     function transfer(address to, uint amount) {
-        // Potential vulnerability found:
-        // Missing balance check
+        // Detected vulnerability:
+        // Insufficient balance check
         balances[msg.sender] -= amount;
         balances[to] += amount;
     }
 }`}</code>
               </pre>
               <div className="mt-4 p-4 bg-accent/10 rounded-lg border border-accent/20">
-                <h3 className="text-primary-light font-semibold mb-2">AI Analysis Result:</h3>
-                <p className="text-gray-300">Detected: Potential reentrancy vulnerability and missing balance validation.</p>
+                <h3 className="text-primary-light font-semibold mb-2">AI-Powered Vulnerability Report:</h3>
+                <p className="text-gray-300">Detected: Missing balance validation, vulnerable to reentrancy attack.</p>
               </div>
             </div>
           </div>
