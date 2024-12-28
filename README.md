@@ -66,7 +66,7 @@ Refer to our [quick start guide](https://edux.gitbook.io/edux-docs/getting-start
 ## Contributing
 
 Thank you for your interest in contributing! Please refer to
-[CONTRIBUTING.md](https://github.com/loft-sh/vcluster/blob/main/CONTRIBUTING.md) for guidance.
+[CONTRIBUTING.md](https://github.com/Alok-2003/EduX/blob/main/CONTRIBUTING.md) for guidance.
 
 ## License
 
