@@ -15,7 +15,6 @@ export default function Header() {
                     <Link to="/learn" className="hover:text-primary-light px-3 py-2 rounded-md transition-colors duration-200">Learn</Link>
                     <Link to="/jobs" className="hover:text-primary-light px-3 py-2 rounded-md transition-colors duration-200">Jobs</Link>
                     <Link to="/enterprise" className="hover:text-primary-light px-3 py-2 rounded-md transition-colors duration-200">Enterprise</Link>
-                    <Link to="/CProfile" className="hover:text-primary-light px-3 py-2 rounded-md transition-colors duration-200">C Profile</Link>
                 </nav>
                 <div className="relative z-50">
                     {!authState || !authState.isAuthenticated ? (
