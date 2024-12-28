@@ -1,7 +1,5 @@
-import React from 'react';
 import { Briefcase, MapPin, Clock } from 'lucide-react';
 import type { Job } from '../types/index';
-
 export default function Jobs() {
   const jobs: Job[] = [
     {

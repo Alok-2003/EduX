@@ -1,6 +1,4 @@
-import React from 'react';
 import { Shield, Code, Building2, Brain } from 'lucide-react';
-
 export default function Features() {
   const features = [
     {

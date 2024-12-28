@@ -1,6 +1,4 @@
-import React from 'react';
 import { AlertTriangle, Shield, Lock } from 'lucide-react';
-
 export default function Learn() {
   const vulnerabilities = [
     {
