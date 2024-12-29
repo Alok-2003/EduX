@@ -3,6 +3,7 @@ import { Building2, UserCircle } from 'lucide-react';
 import { useFirebase } from '../contexts/FirebaseContext';
 import { useOCAuth } from '@opencampus/ocid-connect-js';
 import { useNavigate } from 'react-router-dom';
+import toast, { Toaster } from 'react-hot-toast';
 
 const RoleSelector = ({ onSelect }: { onSelect: (role: 'developer' | 'enterprise') => void }) => (
   <div className="">
@@ -233,7 +234,10 @@ const CProfile = () => {
   const saveProfile = (data: any) => {
     const userId = ethAddress;
     saveCProfileData(data, userId);
-    navigate('/');
+    toast.success('Profile created successfully!');
+    setTimeout(() => {
+      navigate('/');
+    }, 3000); 
   };
 
   return (
@@ -241,6 +245,7 @@ const CProfile = () => {
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-white rounded-lg shadow-md p-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-8 text-center">Complete Your Profile</h1>
+          <Toaster />
           {!selectedRole ? (
             <RoleSelector onSelect={setSelectedRole} />
           ) : selectedRole === 'developer' ? (
