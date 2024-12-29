@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Building2, UserCircle } from 'lucide-react';
 import { useFirebase } from '../contexts/FirebaseContext';
 import { useOCAuth } from '@opencampus/ocid-connect-js';
-import { useNavigate } from 'react-router-dom';  // Importing useNavigate
+import { useNavigate } from 'react-router-dom';
 
 const RoleSelector = ({ onSelect }: { onSelect: (role: 'developer' | 'enterprise') => void }) => (
   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -27,22 +27,27 @@ const RoleSelector = ({ onSelect }: { onSelect: (role: 'developer' | 'enterprise
 );
 
 const DeveloperForm = ({
-    saveProfile,
-    role,
-  }: {
-    saveProfile: (data: any) => void;
-    role: 'developer' | 'enterprise';
-  }) => {
-    const [fullName, setFullName] = useState('');
-    const [experience, setExperience] = useState('');
-    const [skills, setSkills] = useState('');
-    const [github, setGithub] = useState('');
-    const [telegram, setTelegram] = useState('');
-  
-    const handleSubmit = (e: React.FormEvent) => {
-      e.preventDefault();
+  saveProfile,
+  role,
+}: {
+  saveProfile: (data: any) => void;
+  role: 'developer' | 'enterprise';
+}) => {
+  const [fullName, setFullName] = useState('');
+  const [experience, setExperience] = useState('');
+  const [skills, setSkills] = useState('');
+  const [github, setGithub] = useState('');
+  const [telegram, setTelegram] = useState('');
+  const [agreedToTerms, setAgreedToTerms] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (agreedToTerms) {
       saveProfile({ fullName, experience, skills, github, telegram, role });
-    };
+    } else {
+      alert('You must agree to the terms and conditions to proceed.');
+    }
+  };
 
   return (
     <form className="space-y-6" onSubmit={handleSubmit}>
@@ -94,6 +99,17 @@ const DeveloperForm = ({
           className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
         />
       </div>
+      <div>
+        <label className="flex items-center text-sm">
+          <input
+            type="checkbox"
+            checked={agreedToTerms}
+            onChange={(e) => setAgreedToTerms(e.target.checked)}
+            className="mr-2"
+          />
+          I agree that my data will be stored securely with my permission.
+        </label>
+      </div>
       <button
         type="submit"
         className="w-full bg-indigo-600 text-white py-3 px-4 rounded-md hover:bg-indigo-700"
@@ -105,22 +121,27 @@ const DeveloperForm = ({
 };
 
 const EnterpriseForm = ({
-    saveProfile,
-    role,
-  }: {
-    saveProfile: (data: any) => void;
-    role: 'developer' | 'enterprise';
-  }) => {
-    const [companyName, setCompanyName] = useState('');
-    const [website, setWebsite] = useState('');
-    const [contactEmail, setContactEmail] = useState('');
-    const [telegram, setTelegram] = useState('');
-    const [description, setDescription] = useState('');
-  
-    const handleSubmit = (e: React.FormEvent) => {
-      e.preventDefault();
+  saveProfile,
+  role,
+}: {
+  saveProfile: (data: any) => void;
+  role: 'developer' | 'enterprise';
+}) => {
+  const [companyName, setCompanyName] = useState('');
+  const [website, setWebsite] = useState('');
+  const [contactEmail, setContactEmail] = useState('');
+  const [telegram, setTelegram] = useState('');
+  const [description, setDescription] = useState('');
+  const [agreedToTerms, setAgreedToTerms] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (agreedToTerms) {
       saveProfile({ companyName, website, contactEmail, telegram, description, role });
-    };
+    } else {
+      alert('You must agree to the terms and conditions to proceed.');
+    }
+  };
 
   return (
     <form className="space-y-6" onSubmit={handleSubmit}>
@@ -171,6 +192,17 @@ const EnterpriseForm = ({
           className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
         />
       </div>
+      <div>
+        <label className="flex items-center text-sm">
+          <input
+            type="checkbox"
+            checked={agreedToTerms}
+            onChange={(e) => setAgreedToTerms(e.target.checked)}
+            className="mr-2"
+          />
+          I agree that my data will be stored securely with my permission.
+        </label>
+      </div>
       <button
         type="submit"
         className="w-full bg-indigo-600 text-white py-3 px-4 rounded-md hover:bg-indigo-700"
@@ -185,12 +217,11 @@ const CProfile = () => {
   const [selectedRole, setSelectedRole] = useState<'developer' | 'enterprise' | null>(null);
   const { saveCProfileData } = useFirebase();
   const { ethAddress } = useOCAuth();
-  const navigate = useNavigate();  
+  const navigate = useNavigate();
   const saveProfile = (data: any) => {
-    const userId = ethAddress; // Use a unique user ID or obtain from session
-    saveCProfileData(data, userId); 
+    const userId = ethAddress;
+    saveCProfileData(data, userId);
     navigate('/');
-    // Save the profile data to Firestore
   };
 
   return (
