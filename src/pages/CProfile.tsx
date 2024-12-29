@@ -5,26 +5,34 @@ import { useOCAuth } from '@opencampus/ocid-connect-js';
 import { useNavigate } from 'react-router-dom';
 
 const RoleSelector = ({ onSelect }: { onSelect: (role: 'developer' | 'enterprise') => void }) => (
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-    <button
-      onClick={() => onSelect('developer')}
-      className="flex flex-col items-center p-6 border-2 border-gray-200 rounded-lg hover:border-indigo-500 hover:bg-indigo-50 transition-all"
-    >
-      <UserCircle className="h-16 w-16 text-indigo-600 mb-4" />
-      <h3 className="text-xl font-semibold mb-2">Developer</h3>
-      <p className="text-gray-600 text-center">Join audit teams and review smart contracts</p>
-    </button>
+  <div className="">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <button
+        onClick={() => onSelect('developer')}
+        className="flex flex-col items-center p-6 border-2 border-gray-200 rounded-lg hover:border-indigo-500 hover:bg-indigo-50 transition-all"
+      >
+        <UserCircle className="h-16 w-16 text-indigo-600 mb-4" />
+        <h3 className="text-xl font-semibold mb-2">Developer</h3>
+        <p className="text-gray-600 text-center">Join audit teams and review smart contracts</p>
+      </button>
 
-    <button
-      onClick={() => onSelect('enterprise')}
-      className="flex flex-col items-center p-6 border-2 border-gray-200 rounded-lg hover:border-indigo-500 hover:bg-indigo-50 transition-all"
-    >
-      <Building2 className="h-16 w-16 text-indigo-600 mb-4" />
-      <h3 className="text-xl font-semibold mb-2">Enterprise</h3>
-      <p className="text-gray-600 text-center">Submit smart contracts for security audits</p>
-    </button>
+      <button
+        onClick={() => onSelect('enterprise')}
+        className="flex flex-col items-center p-6 border-2 border-gray-200 rounded-lg hover:border-indigo-500 hover:bg-indigo-50 transition-all"
+      >
+        <Building2 className="h-16 w-16 text-indigo-600 mb-4" />
+        <h3 className="text-xl font-semibold mb-2">Enterprise</h3>
+        <p className="text-gray-600 text-center">Submit smart contracts for security audits</p>
+      </button>
+
+
+    </div>
+    <p className="text-teal-600 text-center mt-6">
+      If you created your profile, then go to the home page.
+    </p>
   </div>
 );
+
 
 const DeveloperForm = ({
   saveProfile,
@@ -38,12 +46,13 @@ const DeveloperForm = ({
   const [skills, setSkills] = useState('');
   const [github, setGithub] = useState('');
   const [telegram, setTelegram] = useState('');
+  const [teamColor, setteamColor] = useState('')
   const [agreedToTerms, setAgreedToTerms] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (agreedToTerms) {
-      saveProfile({ fullName, experience, skills, github, telegram, role });
+      saveProfile({ fullName, experience, skills, github, telegram, role, teamColor });
     } else {
       alert('You must agree to the terms and conditions to proceed.');
     }
@@ -132,12 +141,15 @@ const EnterpriseForm = ({
   const [contactEmail, setContactEmail] = useState('');
   const [telegram, setTelegram] = useState('');
   const [description, setDescription] = useState('');
+  const [teamRed, setteamRed] = useState('');
+  const [teamBlue, setteamBlue] = useState('');
+
   const [agreedToTerms, setAgreedToTerms] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (agreedToTerms) {
-      saveProfile({ companyName, website, contactEmail, telegram, description, role });
+      saveProfile({ companyName, website, contactEmail, telegram, description, role, teamRed, teamBlue });
     } else {
       alert('You must agree to the terms and conditions to proceed.');
     }
