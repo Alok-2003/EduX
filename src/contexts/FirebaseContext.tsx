@@ -1,19 +1,28 @@
 import React, { createContext, useContext } from 'react';
 import { db } from '../lib/firebase'; // Ensure this is the correct path to your firebase config
-import { doc, setDoc, collection, getDocs } from 'firebase/firestore';
+import { doc, setDoc, collection, getDocs, arrayUnion } from 'firebase/firestore';
+
 interface FirebaseContextType {
   saveTestData: (data: TestData) => Promise<void>;
   saveCProfileData: (data: any, userId: string) => Promise<void>;
   fetchAllUsers: () => Promise<any[]>;
+  saveEnterpriseData: (data: EnterpriseData, enterpriseId: string) => Promise<void>;
 }
 
 interface TestData {
   name: string;
 }
 
+interface EnterpriseData {
+  enterpriseName: string;
+  contactInfo: string;
+  // Add other fields as needed
+}
+
 const FirebaseContext = createContext<FirebaseContextType | undefined>(undefined);
 
 export const FirebaseProvider = ({ children }: { children: React.ReactNode }) => {
+
 
   // Function to save test data
   const saveTestData = async (data: TestData) => {
@@ -52,9 +61,44 @@ export const FirebaseProvider = ({ children }: { children: React.ReactNode }) =>
     }
   };
 
-  // Provide both functions to the context
+  // Function to save enterprise data
+  const saveEnterpriseData = async (data: EnterpriseData, ethAddress: string) => {
+    try {
+      // Fetch all users to find the matching ethAddress
+      const querySnapshot = await getDocs(collection(db, 'User'));
+      let matchingUserId: string | null = null;
+      console.log(ethAddress)
+      querySnapshot.forEach((doc) => {
+        const userData = doc.data();
+        console.log(userData)
+        if (userData.EthAdd === ethAddress) {
+          matchingUserId = doc.id; // Get the matching user's document ID
+        }
+      });
+
+      if (matchingUserId) {
+        const userRef = doc(db, 'User', matchingUserId);
+
+        // Add to the auditList array
+        await setDoc(
+          userRef,
+          { auditList: arrayUnion(data) }, // Use arrayUnion to add to array
+          { merge: true } // Merge to avoid overwriting other fields
+        );
+        console.log('Enterprise data saved to auditList successfully');
+      } else {
+        console.error('No user found with the matching ethAddress');
+      }
+    } catch (error) {
+      console.error('Error saving enterprise data to auditList:', error);
+    }
+  };
+
+
+
+  // Provide all functions to the context
   return (
-    <FirebaseContext.Provider value={{ saveTestData, saveCProfileData, fetchAllUsers }}>
+    <FirebaseContext.Provider value={{ saveTestData, saveCProfileData, fetchAllUsers, saveEnterpriseData }}>
       {children}
     </FirebaseContext.Provider>
   );

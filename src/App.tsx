@@ -1,6 +1,7 @@
 import React from 'react';
 import { OCConnect } from '@opencampus/ocid-connect-js';
 import AppRoutes from './Components/Routes';
+import { GlobalProvider } from './contexts/GlobalContext';
 
 const App: React.FC = () => {
     const opts = {
@@ -10,12 +11,14 @@ const App: React.FC = () => {
 
     return (
         <OCConnect opts={opts} sandboxMode={true}>
-            <div className="App">
-                <header className="App-header"></header>
-                <main>
-                    <AppRoutes />
-                </main>
-            </div>
+            <GlobalProvider>
+                <div className="App">
+                    <header className="App-header"></header>
+                    <main>
+                        <AppRoutes />
+                    </main>
+                </div>
+            </GlobalProvider>
         </OCConnect>
     );
 };

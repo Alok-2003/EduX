@@ -1,12 +1,18 @@
 import { LoginButton, useOCAuth } from '@opencampus/ocid-connect-js';
 import { Link } from 'react-router-dom';
-import { useFirebase } from '../contexts/FirebaseContext';
-import { useEffect, useState } from 'react';
+import { useGlobalContext } from '../contexts/GlobalContext';
+import { useState, useEffect } from 'react';
 
 export default function Header() {
-    const { authState, ethAddress, OCId } = useOCAuth();
-    const { fetchAllUsers } = useFirebase();
-    const [role, setRole] = useState<string | null>(null);
+  const { authState, ethAddress, OCId } = useOCAuth();
+  const { setEthAddress } = useGlobalContext();
+  const [role, setRole] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (ethAddress) {
+      setEthAddress(ethAddress); // Store ethAddress globally
+    }
+  }, [ethAddress, setEthAddress]);
 
     // useEffect(() => {
     //     const fetchUserRole = async () => {

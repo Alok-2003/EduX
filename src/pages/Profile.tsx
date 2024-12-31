@@ -24,7 +24,7 @@ const Profile = () => {
                 </h1>
                 <div className="text-center">
                     {!authState || !authState.isAuthenticated ? (
-                        <div className="flex justify-center">
+                        <div className="flex justify-center mb-4">
                             <LoginButton />
                         </div>
                     ) : (

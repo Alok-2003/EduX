@@ -49,11 +49,12 @@ const DeveloperForm = ({
   const [telegram, setTelegram] = useState('');
   const [teamColor, setteamColor] = useState('')
   const [agreedToTerms, setAgreedToTerms] = useState(false);
-
+  const { ethAddress } = useOCAuth();
+  const EthAdd=ethAddress;
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (agreedToTerms) {
-      saveProfile({ fullName, experience, skills, github, telegram, role, teamColor });
+      saveProfile({ fullName, experience, skills, github, telegram, role, teamColor,EthAdd });
     } else {
       alert('You must agree to the terms and conditions to proceed.');
     }
@@ -144,13 +145,16 @@ const EnterpriseForm = ({
   const [description, setDescription] = useState('');
   const [teamRed, setteamRed] = useState('');
   const [teamBlue, setteamBlue] = useState('');
-
   const [agreedToTerms, setAgreedToTerms] = useState(false);
+  const { ethAddress } = useOCAuth();
+  const EthAdd=ethAddress;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (agreedToTerms) {
-      saveProfile({ companyName, website, contactEmail, telegram, description, role, teamRed, teamBlue });
+      const formData = {companyName,website,contactEmail,telegram,description,role,teamRed,teamBlue,EthAdd };
+      console.log(formData);
+      saveProfile(formData);
     } else {
       alert('You must agree to the terms and conditions to proceed.');
     }

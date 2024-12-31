@@ -22,11 +22,11 @@ export interface SmartContract {
   
   export interface CompanyRequest {
     id: string;
-    companyName: string;
     contractName: string;
     chainType: string;
     budget: string;
     timeline: string;
     description: string;
+    contractCode: string;
     status: 'pending' | 'approved' | 'rejected';
   }
