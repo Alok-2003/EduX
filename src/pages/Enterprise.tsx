@@ -121,10 +121,10 @@ function AuditForm() {
             required
           >
             <option value="">Select chain</option>
-            <option value="ethereum">Ethereum</option>
-            <option value="binance">Binance Smart Chain</option>
-            <option value="polygon">Polygon</option>
-            <option value="solana">Solana</option>
+            <option value="Ethereum">Ethereum</option>
+            <option value="Binance">Binance Smart Chain</option>
+            <option value="Polygon">Polygon</option>
+            <option value="Solana">Solana</option>
           </select>
         </FormField>
 
@@ -139,7 +139,7 @@ function AuditForm() {
           />
         </FormField>
 
-        <FormField label="Project Timeline">
+        <FormField label="Project Timeline(week)">
           <input
             type="text"
             className={inputStyles}
