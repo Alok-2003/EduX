@@ -2,41 +2,42 @@ import { LoginButton, useOCAuth } from '@opencampus/ocid-connect-js';
 import { Link } from 'react-router-dom';
 import { useGlobalContext } from '../contexts/GlobalContext';
 import { useState, useEffect } from 'react';
+import { useFirebase } from '../contexts/FirebaseContext';
 
 export default function Header() {
-  const { authState, ethAddress, OCId } = useOCAuth();
-  const { setEthAddress } = useGlobalContext();
-  const [role, setRole] = useState<string | null>(null);
+    const { authState, ethAddress, OCId } = useOCAuth();
+    const { setEthAddress } = useGlobalContext();
+    const [role, setRole] = useState<string | null>(null);
 
-  useEffect(() => {
-    if (ethAddress) {
-      setEthAddress(ethAddress); // Store ethAddress globally
-    }
-  }, [ethAddress, setEthAddress]);
+    useEffect(() => {
+        if (ethAddress) {
+            setEthAddress(ethAddress); // Store ethAddress globally
+        }
+    }, [ethAddress, setEthAddress]);
+    const { fetchAllUsers } = useFirebase();
+    useEffect(() => {
+        const fetchUserRole = async () => {
+            try {
+                if (ethAddress) {
+                    const users = await fetchAllUsers();
+                    if (!users || users.length === 0) {
+                        return;
+                    }
+                    const matchedUser = users.find(
+                        (user: any) => user.id?.toLowerCase() === ethAddress.toLowerCase()
+                    );
+                    if (matchedUser) {
+                        setRole(matchedUser.role);
+                    }
+                }
+            } catch (error) {
+                console.error("Error fetching user role:", error);
+            }
+        };
+        fetchUserRole();
+    }, [ethAddress, fetchAllUsers]);
 
-    // useEffect(() => {
-    //     const fetchUserRole = async () => {
-    //         try {
-    //             if (ethAddress) {
-    //                 const users = await fetchAllUsers();
-    //                 if (!users || users.length === 0) {
-    //                     return;
-    //                 }
-    //                 const matchedUser = users.find(
-    //                     (user: any) => user.id?.toLowerCase() === ethAddress.toLowerCase()
-    //                 );
-    //                 if (matchedUser) {
-    //                     setRole(matchedUser.role);
-    //                 }
-    //             }
-    //         } catch (error) {
-    //             console.error("Error fetching user role:", error);
-    //         }
-    //     };
-    //     fetchUserRole();
-    // }, [ethAddress, fetchAllUsers]);
-    
-    
+
 
     return (
         <header className="bg-dark text-white py-4 px-4 sm:px-6 lg:px-8">

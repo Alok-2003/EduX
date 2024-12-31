@@ -47,14 +47,14 @@ const DeveloperForm = ({
   const [skills, setSkills] = useState('');
   const [github, setGithub] = useState('');
   const [telegram, setTelegram] = useState('');
-  const [teamColor, setteamColor] = useState('')
+  // const [teamColor, setteamColor] = useState('')
   const [agreedToTerms, setAgreedToTerms] = useState(false);
   const { ethAddress } = useOCAuth();
-  const EthAdd=ethAddress;
+  const EthAdd = ethAddress;
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (agreedToTerms) {
-      saveProfile({ fullName, experience, skills, github, telegram, role, teamColor,EthAdd });
+      saveProfile({ fullName, experience, skills, github, telegram, role, EthAdd });
     } else {
       alert('You must agree to the terms and conditions to proceed.');
     }
@@ -143,16 +143,16 @@ const EnterpriseForm = ({
   const [contactEmail, setContactEmail] = useState('');
   const [telegram, setTelegram] = useState('');
   const [description, setDescription] = useState('');
-  const [teamRed, setteamRed] = useState('');
-  const [teamBlue, setteamBlue] = useState('');
+  // const [teamRed, setteamRed] = useState('');
+  // const [teamBlue, setteamBlue] = useState('');
   const [agreedToTerms, setAgreedToTerms] = useState(false);
   const { ethAddress } = useOCAuth();
-  const EthAdd=ethAddress;
+  const EthAdd = ethAddress;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (agreedToTerms) {
-      const formData = {companyName,website,contactEmail,telegram,description,role,teamRed,teamBlue,EthAdd };
+      const formData = { companyName, website, contactEmail, telegram, description, role, EthAdd };
       console.log(formData);
       saveProfile(formData);
     } else {
@@ -241,7 +241,7 @@ const CProfile = () => {
     toast.success('Profile created successfully!');
     setTimeout(() => {
       navigate('/');
-    }, 3000); 
+    }, 3000);
   };
 
   return (

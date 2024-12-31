@@ -6,17 +6,11 @@ interface FirebaseContextType {
   saveTestData: (data: TestData) => Promise<void>;
   saveCProfileData: (data: any, userId: string) => Promise<void>;
   fetchAllUsers: () => Promise<any[]>;
-  saveEnterpriseData: (data: EnterpriseData, enterpriseId: string) => Promise<void>;
+  saveEnterpriseData: (data: any, enterpriseId: string) => Promise<void>;
 }
 
 interface TestData {
   name: string;
-}
-
-interface EnterpriseData {
-  enterpriseName: string;
-  contactInfo: string;
-  // Add other fields as needed
 }
 
 const FirebaseContext = createContext<FirebaseContextType | undefined>(undefined);
@@ -62,7 +56,7 @@ export const FirebaseProvider = ({ children }: { children: React.ReactNode }) =>
   };
 
   // Function to save enterprise data
-  const saveEnterpriseData = async (data: EnterpriseData, ethAddress: string) => {
+  const saveEnterpriseData = async (data: any, ethAddress: string) => {
     try {
       // Fetch all users to find the matching ethAddress
       const querySnapshot = await getDocs(collection(db, 'User'));
