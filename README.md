@@ -1,8 +1,8 @@
 # EduX: Your one stop platform to Learn & Earn
 <br>
-<a href="https://www.vcluster.com"><img src="docs/static/media/vcluster_horizontal_black.svg" width="500"></a>
+<a href="https://eduxx.vercel.app/"><img src="./images/p272x9.png" width="500"></a>
 
-### **[Website](https://www.vcluster.com)** • **[Documentation](https://edux.gitbook.io/edux-docs)** • **[Architectural Diagrams](https://www.vcluster.com/docs/what-are-virtual-clusters)** • **[EDU Chain Docs](https://devdocs.opencampus.xyz/)**
+### **[Website](https://eduxx.vercel.app/)** • **[Documentation](https://edux.gitbook.io/edux-docs)** • **[Architectural Diagrams](https://edux.gitbook.io/edux-docs/readme/quickstart)** • **[EDU Chain Docs](https://devdocs.opencampus.xyz/)**
 
 
 Welcome to **EduX**, your ultimate platform for learning, collaboration, and professional growth in the Web3 security and auditing domain! 🚀
@@ -69,7 +69,6 @@ Thank you for your interest in contributing! Please refer to
 [CONTRIBUTING.md](https://github.com/Alok-2003/EduX/blob/main/CONTRIBUTING.md) for guidance.
 
 ## License
-
 
 Licensed under the MIT License (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
 
