@@ -1,8 +1,10 @@
 # EduX: Your one stop platform to Learn & Earn
 <br>
+<div align="center">
 <a href="https://eduxx.vercel.app/"><img src="./images/p272x9.png" width="500"></a>
+</div>
 
-### **[Website](https://eduxx.vercel.app/)** • **[Documentation](https://edux.gitbook.io/edux-docs)** • **[Architectural Diagrams](https://edux.gitbook.io/edux-docs/readme/quickstart)** • **[EDU Chain Docs](https://devdocs.opencampus.xyz/)**
+### **[Website](https://eduxx.vercel.app/)** • **[EduX Documentation](https://edux.gitbook.io/edux-docs)** • **[Architectural Diagrams](https://edux.gitbook.io/edux-docs/getting-started/introduction-to-edux/quickstart#architecture-diagrams)** • **[EDU Chain Docs](https://devdocs.opencampus.xyz/)**
 
 
 Welcome to **EduX**, your ultimate platform for learning, collaboration, and professional growth in the Web3 security and auditing domain! 🚀
@@ -61,7 +63,7 @@ EduX connects **job seekers** with **Web3 firms** through its **Job, Internship,
 
 ## Quick Start
 
-Refer to our [quick start guide](https://edux.gitbook.io/edux-docs/getting-started/quickstart) to learn about our platform.
+Refer to our [quick start guide](https://edux.gitbook.io/edux-docs/getting-started/quick-start-guide-your-journey-to-mastering-web3-security) to learn about our platform.
 
 ## Contributing
 
